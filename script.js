@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 const button = document.createElement('button');
                 button.innerText = choice.text;
                 button.onclick = () => this.choose(choice.nextStep, choice.outcome);
-                button.addEventListener('touchstart', () => this.choose(choice.nextStep, choice.outcome)); // Добавить это
+                button.addEventListener('touchstart', () => this.choose(choice.nextStep, choice.outcome), { passive: true });
                 this.choices.appendChild(button);
             });
         },
