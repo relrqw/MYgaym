@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
         },
         showStep() {
             const step = this.steps[this.currentStep];
-            this.story.innerHTML = <p>${step.text}</p>;
+            this.story.innerHTML = `<p>${step.text}</p>`;
             this.choices.innerHTML = '';
             step.choices.forEach(choice => {
                 const button = document.createElement('button');
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
         },
         choose(nextStep, outcome) {
             if (nextStep === 'end') {
-                this.story.innerHTML = <p>${outcome}</p>;
+                this.story.innerHTML = `<p>${outcome}</p>`;
                 this.choices.innerHTML = ''; // Убираем возможность начать заново
                 this.title.innerText = "Тема - Мошенничество (Подмена сим карты)"; // Меняем заголовок
                 localStorage.setItem('gameOver', true); // Сохраняем состояние игры как проигранное
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         },
         displayGameOver() {
-            this.story.innerHTML = <p>Игра окончена! Вы не можете начать сначала.</p>;
+            this.story.innerHTML = `<p>Игра окончена! Вы не можете начать сначала.</p>`;
             this.choices.innerHTML = ''; // Убираем возможность начать заново
         }
     };
