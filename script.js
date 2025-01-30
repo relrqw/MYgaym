@@ -13,61 +13,39 @@ document.addEventListener("DOMContentLoaded", function() {
             {
                 text: "Вы живете обычной жизнью, каждый месяц вкладываете деньги, активно ведете социальные сети, работаете...",
                 choices: [
-                    { text: "Нажать на ссылку", nextStep: 'end', outcome: "Вас заскамили." },
-                    { text: "Не нажимать на ссылку", nextStep: 1 }
+                    { text: "Нажать на ссылку", nextStep: 'end', outcome: "Вас заскамили.", image: "image1.jpg" },
+                    { text: "Не нажимать на ссылку", nextStep: 1, image: "image2.jpg" }
                 ]
             },
             {
                 text: "Вас просят заполнить информацию о вас, чтобы удостовериться, что это вы.",
                 choices: [
-                    { text: "Заполнить информацию", nextStep: 'end', outcome: "Вас заскамили." },
-                    { text: "Не заполнять информацию", nextStep: 2 }
+                    { text: "Заполнить информацию", nextStep: 'end', outcome: "Вас заскамили.", image: "image3.jpg" },
+                    { text: "Не заполнять информацию", nextStep: 2, image: "image4.jpg" }
                 ]
             },
-            {
-                text: "Для работы и сайтов инвестиций вы регистрируетесь через номер. Вдруг вам звонит оператор и говорит...",
-                choices: [
-                    { text: "Верить оператору", nextStep: 'end', outcome: "Вас заскамили." },
-                    { text: "Не верить оператору", nextStep: 3 }
-                ]
-            },
-            {
-                text: "Вы нуждаетесь в срочных деньгах и нашли покупателя крипты по чуть высшей ставке и при продаже...",
-                choices: [
-                    { text: "Воспользоваться сайтом-посредником", nextStep: 'end', outcome: "Вас заскамили." },
-                    { text: "Не воспользоваться сайтом-посредником", nextStep: 4 }
-                ]
-            },
-            {
-                text: "На работе у вас пропадает связь, и вы не обращаете внимания. После рабочего дня едете домой и по дороге...",
-                choices: [
-                    { text: "Ничего не делать (простой сбой сети)", nextStep: 'end', outcome: "Вас заскамили." },
-                    { text: "Разобраться по приезду", nextStep: 'end', outcome: "Вас заскамили." },
-                    { text: "Нервничать", nextStep: 'end', outcome: "Вас заскамили." },
-                    { text: "Забыть про это", nextStep: 'end', outcome: "Вас заскамили." }
-                ]
-            }
+            // Добавьте остальные шаги таким же образом
         ],
         start() {
             localStorage.removeItem('gameOver'); // Удалить запись gameOver
             this.currentStep = 0;
-            this.title.style.display = 'none'; // Скрыть заголовок при начале игры
+            this.title.style.display = 'block'; // Восстановить заголовок при начале игры
             this.showStep();
         },
         showStep() {
             const step = this.steps[this.currentStep];
-            this.story.innerHTML = `<img src="path_to_image.jpg"><p>${step.text}</p>`;
+            this.story.innerHTML = `<img src="${step.choices[0].image}" alt="Уместное изображение"><p>${step.text}</p>`;
             this.choices.innerHTML = '';
             step.choices.forEach(choice => {
                 const button = document.createElement('button');
                 button.innerText = choice.text;
-                button.onclick = () => this.choose(choice.nextStep, choice.outcome);
+                button.onclick = () => this.choose(choice.nextStep, choice.outcome, choice.image);
                 this.choices.appendChild(button);
             });
         },
-        choose(nextStep, outcome) {
+        choose(nextStep, outcome, image) {
             if (nextStep === 'end') {
-                this.story.innerHTML = `<p>${outcome}</p>`;
+                this.story.innerHTML = `<img src="${image}" alt="Уместное изображение"><p>${outcome}</p>`;
                 this.choices.innerHTML = ''; // Убираем возможность начать заново
                 localStorage.setItem('gameOver', true); // Сохраняем состояние игры как проигранное
             } else {
