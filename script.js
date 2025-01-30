@@ -1,3 +1,4 @@
+localStorage.removeItem('gameOver');
 document.addEventListener("DOMContentLoaded", function() {
     const game = {
         story: document.getElementById('story'),
