@@ -51,11 +51,12 @@ document.addEventListener("DOMContentLoaded", function() {
         start() {
             localStorage.removeItem('gameOver'); // Удалить запись gameOver
             this.currentStep = 0;
+            this.title.style.display = 'none'; // Скрыть заголовок при начале игры
             this.showStep();
         },
         showStep() {
             const step = this.steps[this.currentStep];
-            this.story.innerHTML = `<p>${step.text}</p>`;
+            this.story.innerHTML = `<img src="path_to_image.jpg"><p>${step.text}</p>`;
             this.choices.innerHTML = '';
             step.choices.forEach(choice => {
                 const button = document.createElement('button');
@@ -68,7 +69,6 @@ document.addEventListener("DOMContentLoaded", function() {
             if (nextStep === 'end') {
                 this.story.innerHTML = `<p>${outcome}</p>`;
                 this.choices.innerHTML = ''; // Убираем возможность начать заново
-                this.title.innerText = "Тема - Мошенничество (Подмена сим карты)"; // Меняем заголовок
                 localStorage.setItem('gameOver', true); // Сохраняем состояние игры как проигранное
             } else {
                 this.currentStep = nextStep;
