@@ -11,47 +11,18 @@ document.addEventListener("DOMContentLoaded", function() {
         currentStep: 0,
         steps: [
             {
-                text: "Вы живете обычной жизнью, каждый месяц вкладываете деньги, активно ведете социальные сети, работаете...",
+                text: "Вы живете обычной жизнью...",
                 choices: [
                     { text: "Нажать на ссылку", nextStep: 'end', outcome: "Вас заскамили." },
                     { text: "Не нажимать на ссылку", nextStep: 1 }
                 ]
             },
-            {
-                text: "Вас просят заполнить информацию о вас, чтобы удостовериться, что это вы.",
-                choices: [
-                    { text: "Заполнить информацию", nextStep: 'end', outcome: "Вас заскамили." },
-                    { text: "Не заполнять информацию", nextStep: 2 }
-                ]
-            },
-            {
-                text: "Для работы и сайтов инвестиций вы регистрируетесь через номер. Вдруг вам звонит оператор и говорит...",
-                choices: [
-                    { text: "Верить оператору", nextStep: 'end', outcome: "Вас заскамили." },
-                    { text: "Не верить оператору", nextStep: 3 }
-                ]
-            },
-            {
-                text: "Вы нуждаетесь в срочных деньгах и нашли покупателя крипты по чуть высшей ставке и при продаже...",
-                choices: [
-                    { text: "Воспользоваться сайтом-посредником", nextStep: 'end', outcome: "Вас заскамили." },
-                    { text: "Не воспользоваться сайтом-посредником", nextStep: 4 }
-                ]
-            },
-            {
-                text: "На работе у вас пропадает связь, и вы не обращаете внимания. После рабочего дня едете домой и по дороге...",
-                choices: [
-                    { text: "Ничего не делать (простой сбой сети)", nextStep: 'end', outcome: "Вас заскамили." },
-                    { text: "Разобраться по приезду", nextStep: 'end', outcome: "Вас заскамили." },
-                    { text: "Нервничать", nextStep: 'end', outcome: "Вас заскамили." },
-                    { text: "Забыть про это", nextStep: 'end', outcome: "Вас заскамили." }
-                ]
-            }
+            // Другие шаги...
         ],
         start() {
-            localStorage.removeItem('gameOver'); // Удалить запись gameOver
+            localStorage.removeItem('gameOver');
             this.currentStep = 0;
-            this.title.style.display = 'block'; // Восстановить заголовок при начале игры
+            this.title.style.display = 'block';
             this.showStep();
         },
         showStep() {
@@ -68,8 +39,8 @@ document.addEventListener("DOMContentLoaded", function() {
         choose(nextStep, outcome) {
             if (nextStep === 'end') {
                 this.story.innerHTML = `<p>${outcome}</p>`;
-                this.choices.innerHTML = ''; // Убираем возможность начать заново
-                localStorage.setItem('gameOver', true); // Сохраняем состояние игры как проигранное
+                this.choices.innerHTML = '';
+                localStorage.setItem('gameOver', true);
             } else {
                 this.currentStep = nextStep;
                 this.showStep();
@@ -77,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
         },
         displayGameOver() {
             this.story.innerHTML = `<p>Игра окончена! Вы не можете начать сначала.</p>`;
-            this.choices.innerHTML = ''; // Убираем возможность начать заново
+            this.choices.innerHTML = '';
         }
     };
 
@@ -90,7 +61,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     };
 
-    // Проверка на проигрыш при загрузке страницы
     if (localStorage.getItem('gameOver')) {
         game.displayGameOver();
     } else {
