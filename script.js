@@ -1,8 +1,13 @@
 document.addEventListener("DOMContentLoaded", function() {
+    const storyElement = document.getElementById('story');
+    const choicesElement = document.getElementById('choices');
+    const titleElement = document.getElementById('title');
+    const startButton = document.getElementById('start-button');
+
     const game = {
-        story: document.getElementById('story'),
-        choices: document.getElementById('choices'),
-        title: document.getElementById('title'),
+        story: storyElement,
+        choices: choicesElement,
+        title: titleElement,
         currentStep: 0,
         steps: [
             {
@@ -76,12 +81,19 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     };
 
-    document.getElementById('start-button').onclick = function() {
-        game.start();
+    startButton.onclick = function() {
+        const gameOver = localStorage.getItem('gameOver');
+        if (!gameOver) {
+            game.start();
+        } else {
+            game.displayGameOver();
+        }
     };
 
     // Проверка на проигрыш при загрузке страницы
     if (localStorage.getItem('gameOver')) {
         game.displayGameOver();
+    } else {
+        game.start();
     }
 });
