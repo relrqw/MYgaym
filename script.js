@@ -1,4 +1,3 @@
-localStorage.removeItem('gameOver');
 document.addEventListener("DOMContentLoaded", function() {
     const game = {
         story: document.getElementById('story'),
@@ -7,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
         currentStep: 0,
         steps: [
             {
-                text: "Вы живете обычной жизнью, каждый месяц вкладываете деньги, активно ведете социальные сети...",
+                text: "Вы живете обычной жизнью, каждый месяц вкладываете деньги, активно ведете социальные сети, работаете в крупной компании. В один прекрасный день вам приходит письмо от оператора с уникальным предложением. В письме говорится, что вы давно не меняли тариф, и установлена ссылка с подписью 'перейдите на официальный сайт для подробностей'.",
                 choices: [
                     { text: "Нажать на ссылку", nextStep: 'end', outcome: "Вас заскамили." },
                     { text: "Не нажимать на ссылку", nextStep: 1 }
@@ -21,21 +20,21 @@ document.addEventListener("DOMContentLoaded", function() {
                 ]
             },
             {
-                text: "Для работы и сайтов инвестиций вы регистрируетесь через номер...",
+                text: "Для работы и сайтов инвестиций вы регистрируетесь через номер. Вдруг вам звонит оператор и говорит, что ваш номер взломали, и предлагает помочь. Он просит вас зайти в банки и перекинуть деньги на другие счета, а вашу криптовалюту — на кошельки людей, которые предоставляют услуги страховщика.",
                 choices: [
                     { text: "Верить оператору", nextStep: 'end', outcome: "Вас заскамили." },
                     { text: "Не верить оператору", nextStep: 3 }
                 ]
             },
             {
-                text: "Вы нуждаетесь в срочных деньгах и нашли покупателя крипты...",
+                text: "Вы нуждаетесь в срочных деньгах и нашли покупателя крипты по чуть высшей ставке и при продаже надо отправлять валюту через сайт посредник.",
                 choices: [
                     { text: "Воспользоваться сайтом-посредником", nextStep: 'end', outcome: "Вас заскамили." },
                     { text: "Не воспользоваться сайтом-посредником", nextStep: 4 }
                 ]
             },
             {
-                text: "На работе у вас пропадает связь, и вы не обращаете внимания...",
+                text: "На работе у вас пропадает связь, и вы не обращаете внимания. После рабочего дня едете домой и понимаете, что 5 минут как нет связи.",
                 choices: [
                     { text: "Ничего не делать (простой сбой сети)", nextStep: 'end', outcome: "Вас заскамили." },
                     { text: "Разобраться по приезду", nextStep: 'end', outcome: "Вас заскамили." },
@@ -55,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
         },
         showStep() {
             const step = this.steps[this.currentStep];
-            this.story.innerHTML = `<p>${step.text}</p>`;
+            this.story.innerHTML = <p>${step.text}</p>;
             this.choices.innerHTML = '';
             step.choices.forEach(choice => {
                 const button = document.createElement('button');
@@ -66,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
         },
         choose(nextStep, outcome) {
             if (nextStep === 'end') {
-                this.story.innerHTML = `<p>${outcome}</p>`;
+                this.story.innerHTML = <p>${outcome}</p>;
                 this.choices.innerHTML = ''; // Убираем возможность начать заново
                 this.title.innerText = "Тема - Мошенничество (Подмена сим карты)"; // Меняем заголовок
                 localStorage.setItem('gameOver', true); // Сохраняем состояние игры как проигранное
@@ -76,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         },
         displayGameOver() {
-            this.story.innerHTML = `<p>Игра окончена! </p>`;
+            this.story.innerHTML = <p>Игра окончена! Вы не можете начать сначала.</p>;
             this.choices.innerHTML = ''; // Убираем возможность начать заново
         }
     };
