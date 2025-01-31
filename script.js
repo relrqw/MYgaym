@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     { text: "Все хорошенько продумывать", nextStep: 'end', outcome: "Игра окончена. Вас заскамили." },
                     { text: "Забыть про это", nextStep: 'end', outcome: "Игра окончена. Вас заскамили." },
                     { text: "Ничего страшного", nextStep: 'end', outcome: "Игра окончена. Вас заскамили." },
-                    { text: "Не трогать телефон", nextStep: 'end', outcome: "Игра окончена. Вас заскамили." }
+                    { text: "Перезагрузить телефон", nextStep: 'end', outcome: "Игра окончена. Вас заскамили." }
                 ]
             }
         ],
